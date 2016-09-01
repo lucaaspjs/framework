@@ -5,7 +5,7 @@
  *
  * @author Lucaas
  */
-class produtos {
+class Produtos {
 
     public function index() {
         echo "Produtos - index";

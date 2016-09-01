@@ -5,10 +5,10 @@
  *
  * @author Lucaas
  */
-class app {
+class App extends Controller {
 
     public function index() {
-        echo "App - index";
+        $this->view("index");
     }
 
 }
