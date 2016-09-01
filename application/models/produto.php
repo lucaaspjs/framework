@@ -5,7 +5,7 @@
  *
  * @author Lucaas
  */
-class Produtos extends Model {
+class Produto extends Model {
 
     protected $tabela = "produtos";
 
