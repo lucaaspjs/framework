@@ -94,8 +94,7 @@ class Model {
         $values = substr($values, 1);
 
         $sql = "INSERT INTO {$this->tabela}({$keys}) VALUES({$values})";
-        #$this->conn->query($sql);
-        echo $sql;
+        $this->conn->query($sql);
     }
 
     /**
@@ -112,15 +111,25 @@ class Model {
         $set = substr($set, 1);
 
         $sql = "UPDATE {$this->tabela} SET {$set} {$this->where}";
-        #$this->conn->query($sql);
-        echo $sql;
+        $this->conn->query($sql);
     }
 
     /**
      * Deletar
      */
     public function delete() {
-        
+        $sql = "DELETE FROM {$this->tabela} WHERE id='{$this->id}'";
+        $this->conn->query($sql);
+    }
+
+    public function deleteById($id) {
+        $sql = "DELETE FROM {$this->tabela} WHERE id='{$id}'";
+        $this->conn->query($sql);
+    }
+
+    public function getById($id) {
+        $this->where('id', $id);
+        $this->get();
     }
 
     public function select(Array $params) {
