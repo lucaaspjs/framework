@@ -1,18 +1,15 @@
 <?php
 
-$key = isset($_GET['key']) ? $_GET['key'] . "/" : "app/index";
-
-$separador = explode("/", $key);
-$controller = $separador[0];
-$action = $separador[1] == NULL ? "index" : $separador[1];
+define('CONTROLLERS', 'application/controllers/');
+define('VIEWS', 'application/views/');
+define('MODELS', 'application/models/');
 
 function __autoload($file) {
-    require_once "application/models/" . $file . ".php";
+    require_once( MODELS . $file . '.php');
 }
 
-require_once "system/controller.php";
-require_once "system/model.php";
-require_once "application/controllers/" . $controller . ".php";
+require_once('system/core.php');
+require_once('system/controller.php');
+require_once('system/model.php');
 
-$app = new $controller();
-$app->$action();
+$core = new Core();
