@@ -7,6 +7,11 @@
  */
 class Model {
 
+    private $select = "*"; # valor padrão *
+    private $where = "";
+    private $order_by = "";
+    private $limit = "";
+    private $offset = "";
     private $db_host = "localhost";
     private $db_name = "framework";
     private $db_user = "root";
@@ -46,4 +51,51 @@ class Model {
         }
     }
 
+    /**
+     * Leitura
+     */
+    public function get() {
+        
+    }
+
+    /**
+     * Salvar
+     */
+    public function save() {
+        
+    }
+
+    /**
+     * Atualizar
+     */
+    public function update() {
+        
+    }
+
+    /**
+     * Deletar
+     */
+    public function delete() {
+        
+    }
+
+    public function select(Array $params) {
+        
+    }
+
+    public function where($column, $value) {
+        
+    }
+
+    public function order_by(Array $params, $ordem = 'ASC') {
+        
+    }
+
+    public function limit($value) {
+        
+    }
+
+    public function offset($value) {
+        
+    }
 }
