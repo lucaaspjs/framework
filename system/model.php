@@ -21,7 +21,7 @@ class Model {
     protected $tabela; #tabela relacionada ao objeto
 
     public function __construct() {
-        $dsn = "mysql:host" . $this->db_host . ";dbname=" . $this->db_name;
+        $dsn = "mysql:host=" . $this->db_host . ";dbname=" . $this->db_name;
         $options = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
 
         $this->conn = new PDO($dsn, $this->db_user, $this->db_pass, $options);
@@ -37,7 +37,7 @@ class Model {
         $attributes = $q->fetchAll(PDO::FETCH_COLUMN);
 
         foreach ($attributes as $field) {
-            if ($field == id) {
+            if ($field == "id") {
                 continue;
             }
 
