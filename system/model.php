@@ -12,6 +12,8 @@ class Model {
     private $order_by = "";
     private $limit = "";
     private $offset = "";
+    private $query;
+    private $result;
     private $db_host = "localhost";
     private $db_name = "framework";
     private $db_user = "root";
@@ -59,7 +61,19 @@ class Model {
             $this->select = 'id,' . $this->select;
         }
 
-        echo "SELECT {$this->select} FROM {$this->tabela} {$this->where} {$this->order_by} {$this->limit} {$this->offset}";
+        $sql = "SELECT {$this->select} FROM {$this->tabela} {$this->where} {$this->order_by} {$this->limit} {$this->offset}";
+        $this->query = $this->conn->query($sql);
+        $this->result = $this->query->fetchAll(PDO::FETCH_ASSOC);
+
+        $temp = $this->result[0];
+
+        if (!is_null($temp)) {
+            $this->id = $temp['id'];
+            unset($temp['id']);
+            foreach ($temp as $k => $v) {
+                $this->data[$k] = $v;
+            }
+        }
     }
 
     /**
@@ -106,4 +120,13 @@ class Model {
     public function offset($value) {
         $this->offset = "offset " . $value;
     }
+
+    public function to_array() {
+        return $this->result[0];
+    }
+
+    public function all_to_array() {
+        return $this->result;
+    }
+
 }
