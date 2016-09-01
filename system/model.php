@@ -88,19 +88,22 @@ class Model {
     }
 
     public function where($column, $value) {
-        
+        $this->where .= empty($this->where) ? "where {$column}='{$value}'" : " and {$column}='{$value}' ";
     }
 
     public function order_by(Array $params, $ordem = 'ASC') {
-        
+        $this->order_by = 'order by ';
+        foreach ($params as $param) {
+            $this->order_by .= "{$param} {$ordem},";
+        }
+        $this->order_by = substr($this->order_by, 0, -1);
     }
 
     public function limit($value) {
-        
+        $this->limit = "limit " . $value;
     }
 
     public function offset($value) {
-        
+        $this->offset = "offset " . $value;
     }
-
 }
