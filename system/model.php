@@ -80,14 +80,40 @@ class Model {
      * Salvar
      */
     public function save() {
-        
+        $keys = "";
+        $values = "";
+        foreach ($this->data as $k => $v) {
+            if (empty($v)) {
+                continue;
+            }
+            $keys .= "," . $k;
+            $values .= ",'{$v}'";
+        }
+
+        $keys = substr($keys, 1);
+        $values = substr($values, 1);
+
+        $sql = "INSERT INTO {$this->tabela}({$keys}) VALUES({$values})";
+        #$this->conn->query($sql);
+        echo $sql;
     }
 
     /**
      * Atualizar
      */
     public function update() {
-        
+        if (empty($this->where)) {
+            $this->where('id', $this->id);
+        }
+        $set = '';
+        foreach ($this->data as $k => $v) {
+            $set .=", {$k}='{$v}'";
+        }
+        $set = substr($set, 1);
+
+        $sql = "UPDATE {$this->tabela} SET {$set} {$this->where}";
+        #$this->conn->query($sql);
+        echo $sql;
     }
 
     /**
