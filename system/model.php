@@ -55,7 +55,11 @@ class Model {
      * Leitura
      */
     public function get() {
-        
+        if ($this->select != '*' && !preg_match('/^id,/', $this->select)) {
+            $this->select = 'id,' . $this->select;
+        }
+
+        echo "SELECT {$this->select} FROM {$this->tabela} {$this->where} {$this->order_by} {$this->limit} {$this->offset}";
     }
 
     /**
@@ -80,7 +84,7 @@ class Model {
     }
 
     public function select(Array $params) {
-        
+        $this->select = implode(',', $params);
     }
 
     public function where($column, $value) {
@@ -98,4 +102,5 @@ class Model {
     public function offset($value) {
         
     }
+
 }
