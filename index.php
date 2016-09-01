@@ -1,4 +1,7 @@
 <?php
 
-$key = isset($_GET['key']) ? $_GET['key'] : "index/index";
-echo "$key";
+$key = isset($_GET['key']) ? $_GET['key'] : "app/index";
+
+$separador = explode("/", $key);
+$controller = $separador[0];
+$action = $separador[1];
