@@ -1,8 +1,14 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+function base_url($uri = NULL){
+ require('application/config/URLHelper.php');
+ return $config['base_url'].$uri;
+}
 
+function base_assets(){
+ return base_url().'assets/';
+}
+
+function redirect($uri = NULL){
+ header("location:".base_url($uri));
+}

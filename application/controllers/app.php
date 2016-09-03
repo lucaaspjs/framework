@@ -7,12 +7,15 @@
  */
 class App extends Controller {
 
+    public function __construct() {
+        parent::__construct();
+    }
+    
     public function index() {
 
-        $func = new Funcionario();
-        $func->getById(1);
-        $func->recursiveGet();
+        $this->load->native_helper('URLHelper');
 
-        print_r($func);
+        $this->render("index");
     }
+
 }
