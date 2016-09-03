@@ -7,8 +7,11 @@
  */
 class Controller {
 
-    protected function view($nome) {
-        require_once "application/views/" . $nome . ".php";
+    protected function view($file, Array $vars = NULL) {
+        if (count($vars) > 0) {
+            extract($vars);
+        }
+        require_once "application/views/" . $file . ".php";
         exit;
     }
 

@@ -8,7 +8,9 @@
 class App extends Controller {
 
     public function index() {
-        #$this->view("index");
+        $dados['nome'] = "Lucas";
+        $dados['sobrenome'] = "Pereira";
+        $this->view("index", $dados);
     }
 
 }
