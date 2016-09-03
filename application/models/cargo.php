@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Description of produtos
+ * Description of cargo
  *
  * @author Lucaas
  */
-class Produto extends Model {
+class Cargo extends Model {
 
-    protected $tabela = "produtos";
+    protected $tabela = "cargos";
 
     public function __construct() {
         parent::__construct();

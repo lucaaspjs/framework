@@ -18,6 +18,9 @@ class Model {
     private $db_name = "framework";
     private $db_user = "root";
     private $db_pass = "root";
+    protected $one_to_one;
+    protected $one_to_many;
+    protected $many_to_many;
 
     /**
      * @var PDO 
@@ -162,6 +165,34 @@ class Model {
 
     public function all_to_array() {
         return $this->result;
+    }
+
+    public function recursiveGet() {
+        if ($this->one_to_one) {
+            foreach ($this->one_to_one as $name) {
+                $var = $name . '_id'; # Nome padrão
+                $r_id = $this->$var; # Pega o ID
+                if (empty($r_id)) {
+                    continue;
+                }#Tratamento, caso estiver em branco "pula".
+                $obj = new $name(); # Instancia o Objeto Vazio
+                $obj->getById($r_id); # Carrega o Objeto a partir do banco.
+                $obj->recursiveGet(); # Verifica e carrega os relacionamento do novo objeto.
+                $this->$name = $obj; # Seta o Objeto como variável
+                # OU
+                #this->$name = $obj->to_array(); //para trazer apenas o array;
+            }
+        }
+        if ($this->one_to_many) {
+            foreach ($this->one_to_many as $name) {
+                $obj = new $name(); # Instancia O Objeto
+                $tmp = strtolower(get_class($this)); # Pega o nome do model.
+                $obj->where($tmp . '_id', $this->id); # Filtra pelo relacionamento.
+                $obj->get(); # Faz a busca
+                $var = $name . '_list'; # Nome Temporariamente Padrão, para tratar de listas.
+                $this->$var = $obj->all_to_array(); # Seta com variável.
+            }
+        }
     }
 
 }
