@@ -27,4 +27,19 @@ class Controller {
         $this->view('base/foot');
     }
 
+    protected function post_to_array(Array $names) {
+        $arr = array();
+        foreach ($names as $name) {
+            $arr[$name] = $_POST[$name];
+        }
+    }
+
+    protected function post_to_obj(Array $names, $obj) {
+        foreach ($names as $name) {
+            $obj->$name = $_POST[$name];
+        }
+
+        return $obj;
+    }
+
 }
